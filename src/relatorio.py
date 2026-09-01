@@ -1,0 +1,8 @@
+import pandas as pd
+from config import OUT_DIR
+
+def gerar_relatorio(df, subgrupo, resumo, comparacao, metricas, efeitos):
+    phq_obs = int(df['phq9_score'].notna().sum()); phq10 = int((df['phq9_score'] >= 10).sum())
+    usa = int((subgrupo['uso_atual'] == 'Usa medicamento atualmente').sum()); nao_usa = int((subgrupo['uso_atual'] == 'Não usa medicamento atualmente').sum())
+    relatorio = f'''# Relatório da análise científica\n\n## Objetivo\n\nO sistema relacionou dados clínicos e medicamentos para descrever a relação entre PHQ-9 e uso atual autorreferido de medicamentos.\n\n## Amostra\n\nA base possui **{len(df)} registros**. O PHQ-9 está preenchido para **{phq_obs} participantes**. Usando a regra `phq9_score >= 10`, foram selecionados **{phq10} participantes**. Nesse subconjunto, {usa} declararam usar medicamento e {nao_usa} declararam não usar.\n\n## Comparação do PHQ-9\n\n{comparacao.round(2).to_markdown(index=False)}\n\n## Desempenho do modelo\n\n{metricas.round(3).to_markdown(index=False)}\n\n## Variáveis com maiores diferenças\n\n{efeitos.head(15).round(3).to_markdown(index=False) if not efeitos.empty else 'Não foi possível calcular.'}\n\n## Limitações\n\nO alvo é `currently_medication`, que representa uso atual autorreferido, e não adesão correta. A base não possui doses esquecidas, interrupção ou escala validada de adesão. O PHQ-9 é instrumento de rastreio, não confirmação diagnóstica. As associações não demonstram causalidade e o modelo não deve orientar decisões clínicas isoladamente.\n'''
+    caminho = OUT_DIR / 'relatorio_analise.md'; caminho.write_text(relatorio, encoding='utf-8'); return caminho

@@ -1,0 +1,2 @@
+modelo,n,n_features,roc_auc_media,roc_auc_dp,f1_media,acuracia_media
+Random Forest exploratório do uso atual,336,247,0.8665766144083612,0.0386008560194833,0.5251062662827369,0.7770412642669007

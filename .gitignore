@@ -216,3 +216,6 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+data/
+/home/diogo/Documentos/codigos/analytic-medical-database-with-machine-learning/data/Finalbaselinedatabase-Brazil-FederalUniversityofSantaMaria(withpostgraduatestudents).xlsx
+/home/diogo/Documentos/codigos/analytic-medical-database-with-machine-learning/data/Medicamentosdatabase-Brazil-FederalUniversityofSantaMaria.xlsx
